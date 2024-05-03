@@ -7,7 +7,7 @@ import com.wjw.service.UserService;
 import com.wjw.service.impl.UserServiceImpl;
 import com.wjw.utils.BaseController;
 import com.wjw.utils.BeansFactory;
-import com.wjw.vo.PageResult;
+import com.wjw.pojo.vo.PageResult;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

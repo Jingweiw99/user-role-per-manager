@@ -1,4 +1,4 @@
-package com.wjw.vo;
+package com.wjw.pojo.vo;
 
 import java.io.Serializable;
 import java.util.List;

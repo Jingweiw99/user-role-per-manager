@@ -5,7 +5,7 @@ import com.wjw.pojo.po.User;
 import com.wjw.pojo.vo.QueryPageBean;
 import com.wjw.service.UserService;
 import com.wjw.utils.SqlSessionUtil;
-import com.wjw.vo.PageResult;
+import com.wjw.pojo.vo.PageResult;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
