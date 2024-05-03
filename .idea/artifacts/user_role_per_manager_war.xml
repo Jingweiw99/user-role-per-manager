@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="user-role-per-manager:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>user-role-per-manager</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="user-role-per-manager-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="user-role-per-manager:war exploded" />
+    </root>
+  </artifact>
+</component>
