@@ -1,6 +1,7 @@
 package com.wjw.dao;
 
 import com.wjw.pojo.po.User;
+import com.wjw.pojo.vo.QueryPageBean;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -8,4 +9,8 @@ import java.util.List;
 public interface UserMapper {
     @Select("select * from t_user")
     List<User> finAllUser();
+
+    List<User> findUserByPage(QueryPageBean queryPageBean);
+    @Select("select count(*) from t_user")
+    Long findUserTotal();
 }
