@@ -1,13 +1,10 @@
 package com.wjw.web;
 
 import com.wjw.pojo.po.User;
-import com.wjw.pojo.vo.QueryPageBean;
-import com.wjw.pojo.vo.Result;
-import com.wjw.pojo.vo.UpdateUser;
+import com.wjw.pojo.vo.*;
 import com.wjw.service.UserService;
 import com.wjw.utils.BaseController;
 import com.wjw.utils.BeansFactory;
-import com.wjw.pojo.vo.PageResult;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +36,18 @@ public class UserServlet extends BaseServlet {
 
     }
 
-    protected void add(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("add");
+    public void add(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        try {
+            AddUser addUser = BaseController.parseJSON2Object(request, AddUser.class);
+            UserService service = BeansFactory.getInstance("userService");
+            service.addUser(addUser);
+            BaseController.printResult(response, new Result(true, "添加用户成功！"));
+        } catch (IOException e) {
+            BaseController.printResult(response, new Result(false, "添加用户失败！"));
+            e.printStackTrace();
+        }
+
     }
 
     public void delete(HttpServletRequest request, HttpServletResponse response) {

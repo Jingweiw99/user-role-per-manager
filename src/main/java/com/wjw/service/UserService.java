@@ -1,6 +1,7 @@
 package com.wjw.service;
 
 import com.wjw.pojo.po.User;
+import com.wjw.pojo.vo.AddUser;
 import com.wjw.pojo.vo.QueryPageBean;
 import com.wjw.pojo.vo.PageResult;
 import com.wjw.pojo.vo.UpdateUser;
@@ -21,4 +22,6 @@ public interface UserService {
      * @param updateUser
      */
     void update(UpdateUser updateUser);
+
+    void addUser(AddUser addUser);
 }

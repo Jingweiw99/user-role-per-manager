@@ -30,4 +30,10 @@
             (#{uid},#{rid})
         </foreach>
     </insert>
+    <insert id="insertRids">
+        insert into t_user_role(user_id,role_id) values
+        <foreach collection="rids" item="rid" separator=",">
+            (#{uid},#{rid})
+        </foreach>
+    </insert>
 </mapper>

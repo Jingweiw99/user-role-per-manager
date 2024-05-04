@@ -3,6 +3,7 @@ package com.wjw.service.impl;
 import com.wjw.dao.UserMapper;
 import com.wjw.pojo.po.Role;
 import com.wjw.pojo.po.User;
+import com.wjw.pojo.vo.AddUser;
 import com.wjw.pojo.vo.QueryPageBean;
 import com.wjw.pojo.vo.UpdateUser;
 import com.wjw.service.UserService;
@@ -45,6 +46,15 @@ public class UserServiceImpl implements UserService {
         mapper.addRoleByUid(updateUser.getId(), updateUser.getRoleIds());
         // 这里可以用事务
         session.close();
+    }
+
+    @Override
+    public void addUser(AddUser addUser) {
+        SqlSession session = SqlSessionUtil.getSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        mapper.addUser(addUser);
+        Integer id = addUser.getId();
+        mapper.insertRids(id,addUser.getRoleIds());
     }
 
 }
