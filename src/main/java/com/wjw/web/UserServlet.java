@@ -3,8 +3,8 @@ package com.wjw.web;
 import com.wjw.pojo.po.User;
 import com.wjw.pojo.vo.QueryPageBean;
 import com.wjw.pojo.vo.Result;
+import com.wjw.pojo.vo.UpdateUser;
 import com.wjw.service.UserService;
-import com.wjw.service.impl.UserServiceImpl;
 import com.wjw.utils.BaseController;
 import com.wjw.utils.BeansFactory;
 import com.wjw.pojo.vo.PageResult;
@@ -46,16 +46,27 @@ public class UserServlet extends BaseServlet {
     public void delete(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("delete");
     }
-
-    public void update(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("update");
+    // 用户更新
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            UpdateUser updateUser = BaseController.parseJSON2Object(request, UpdateUser.class);
+            UserService userService = BeansFactory.getInstance("userService");
+            userService.update(updateUser);
+            Result result = new Result(true, "更新用户成功");
+            BaseController.printResult(response,result);
+        } catch (Exception e) {
+            Result result = new Result(false, "更新用户失败");
+            BaseController.printResult(response,result);
+            e.printStackTrace();
+        }
     }
-
-    public void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // 分页查询
+    public void findAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             QueryPageBean queryPageBean = BaseController.parseJSON2Object(request, QueryPageBean.class);
             System.out.println(queryPageBean);
-            UserServiceImpl service = new UserServiceImpl();
+//            UserServiceImpl service = new UserServiceImpl();
+            UserService service = BeansFactory.getInstance("userService");
             PageResult page = service.selectByPage(queryPageBean);
             BaseController.printResult(response, new Result(true, "查询成功！", page));
         } catch (IOException e) {

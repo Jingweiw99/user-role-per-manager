@@ -24,4 +24,10 @@
                      inner join t_user_role ur
                      inner join t_role r on u.id = ur.user_id and ur.role_id = r.id
                 limit #{offset}, #{pageSize}; 这个是总共3条记录  上面那个是3个用户，有多个全角色情况下会超过3条-->
+    <insert id="addRoleByUid">
+        insert into t_user_role(user_id,role_id) values
+        <foreach collection="rids" item="rid" separator=",">
+            (#{uid},#{rid})
+        </foreach>
+    </insert>
 </mapper>
