@@ -1,5 +1,7 @@
 package com.wjw.web;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wjw.pojo.po.User;
 import com.wjw.pojo.vo.*;
 import com.wjw.service.UserService;
@@ -50,8 +52,21 @@ public class UserServlet extends BaseServlet {
 
     }
 
-    public void delete(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("delete");
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String jsonString = request.getReader().lines().reduce("", (accu, actual) -> accu + actual);
+            JSONObject jsonObject = JSONObject.parseObject(jsonString);
+            Integer id = jsonObject.getInteger("id");
+            UserService service = BeansFactory.getInstance("userService");
+
+            service.deleteByUid(id);
+            BaseController.printResult(response, new Result(true, "删除成功！"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            BaseController.printResult(response, new Result(false, "删除失败！"));
+        }
+
     }
     // 用户更新
     public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -40,4 +40,10 @@ public interface UserMapper {
     void addUser(AddUser addUser);
 
     void insertRids(@Param("uid") Integer id, @Param("rids") Set<String> roleIds);
+
+    @Delete("delete from t_user where id = #{id}")
+    void deleteByUid(Integer id);
+
+    @Delete("delete from t_user_role where user_id = #{id}")
+    void deleteRolesByUid(Integer id);
 }
